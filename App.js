@@ -1,21 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useContext, useEffect } from "react";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { AuthNavigator, HomeNavigator } from "./src/Navigators/index";
+import { Context } from "./src/Context/authContext";
+import Provider from "./src/Context/ContextProvider";
 
-export default function App() {
+const App = () => {
+  const { state, checkToken } = useContext(Context);
+  useEffect(() => {
+    checkToken();
+  }, []);
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar backgroundColor="white" />
+      <NavigationContainer>
+        {state.isAuth ? <HomeNavigator /> : <AuthNavigator />}
+      </NavigationContainer>
+    </>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default () => (
+  <Provider>
+    <App />
+  </Provider>
+);
