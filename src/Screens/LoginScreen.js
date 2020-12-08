@@ -9,15 +9,14 @@ import {
 import useFormValidation from "../validation/useFormValidation";
 import Form from "../Components/Form/Form";
 import Input from "../Components/Input";
-import Error from "../Components/Form/Error";
+
 import EmailValidator from "../validation/EmailValidator";
 import { authConstants } from "../Navigators/constants";
-import { Context } from "../Context/authContext";
+import { Context } from "../Context/Auth";
 import { validator } from "../validation/passwordValidator";
 import CircleButton from "../Components/Form/CircleButton";
 import colors from "../theme/colors";
 import typography from "../theme/typography";
-// import { Context } from "../Context/AuthContext";
 
 export const Login = ({ navigation }) => {
   const email = useFormValidation("", EmailValidator);
@@ -41,8 +40,8 @@ export const Login = ({ navigation }) => {
             blur={email.blur}
             isValid={email.isValid}
             onBlur={() => email.setBlur(true)}
+            error={email.error}
           />
-          {!email.isValid ? <Error error={email.error} /> : null}
           <Input
             label="Password"
             placeholder="Enter Your Password"
@@ -52,9 +51,8 @@ export const Login = ({ navigation }) => {
             onBlur={() => password.setBlur(true)}
             isValid={password.isValid}
             blur={password.blur}
+            error={password.error}
           />
-          {!password.isValid ? <Error error={password.error} /> : null}
-
           <View style={styles.actions}>
             <Text style={styles.infoText}>Sign in</Text>
             <CircleButton

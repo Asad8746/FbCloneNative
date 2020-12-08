@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   ScrollView,
@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Form from "../Components/Form/Form";
 import Input from "../Components/Input";
+import { Context } from "../Context/Auth";
 import CircleButton from "../Components/Form/CircleButton";
 import Error from "../Components/Form/Error";
 
@@ -26,6 +27,17 @@ export const Signup = ({ navigation }) => {
   const about = useFormValidation("", validator, "About is Required");
   const email = useFormValidation("", EmailValidator);
   const password = useFormValidation("", validator, "Password is Required");
+  const { registerUser } = useContext(Context);
+  const onSubmit = () => {
+    registerUser({
+      f_name: f_name.state,
+      l_name: l_name.state,
+      about: about.state,
+      email: email.state,
+      password: password.state,
+      gender: "Male",
+    });
+  };
   return (
     <ScrollView contentContainerStyle={styles.containerStyle}>
       <Text style={styles.heading}>facebook</Text>
@@ -42,7 +54,6 @@ export const Signup = ({ navigation }) => {
             onBlur={() => f_name.setBlur(true)}
             onChange={(value) => f_name.setState(value)}
           />
-          {!f_name.isValid ? <Error error={f_name.error} /> : null}
 
           <Input
             placeholder="Last Name"
@@ -52,18 +63,6 @@ export const Signup = ({ navigation }) => {
             onBlur={() => l_name.setBlur(true)}
             onChange={(value) => l_name.setState(value)}
           />
-          {!l_name.isValid ? <Error error={l_name.error} /> : null}
-          <Input
-            placeholder="What you do?"
-            keyboardType="email-address"
-            value={about.state}
-            blur={about.blur}
-            isValid={about.isValid}
-            onBlur={() => about.setBlur(true)}
-            onChange={(value) => about.setState(value)}
-          />
-          {!about.isValid ? <Error error={about.error} /> : null}
-
           <Input
             placeholder="Email"
             keyboardType="email-address"
@@ -73,7 +72,6 @@ export const Signup = ({ navigation }) => {
             onBlur={() => email.setBlur(true)}
             onChange={(value) => email.setState(value)}
           />
-          {!email.isValid ? <Error error={email.error} /> : null}
           <Input
             placeholder="Password"
             secureTextEntry={true}
@@ -83,11 +81,19 @@ export const Signup = ({ navigation }) => {
             onBlur={() => password.setBlur(true)}
             onChange={(value) => password.setState(value)}
           />
-          {!password.isValid ? <Error error={password.error} /> : null}
+          <Input
+            placeholder="What you do?"
+            keyboardType="email-address"
+            value={about.state}
+            blur={about.blur}
+            isValid={about.isValid}
+            onBlur={() => about.setBlur(true)}
+            onChange={(value) => about.setState(value)}
+          />
 
           <View style={styles.actions}>
             <Text style={styles.infoText}>Sign Up</Text>
-            <CircleButton />
+            <CircleButton onPress={onSubmit} />
           </View>
           <View style={styles.links}>
             <TouchableOpacity

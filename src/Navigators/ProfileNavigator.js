@@ -1,37 +1,12 @@
 import React from "react";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { View, Text } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { ProfileScreen } from "../Screens";
+const Stack = createStackNavigator();
 
-const Tab = createMaterialTopTabNavigator();
-
-const Timeline = () => {
+export const HomeNavigator = () => {
   return (
-    <View>
-      <Text>Timeline</Text>
-    </View>
-  );
-};
-const Followers = () => {
-  return (
-    <View>
-      <Text>Followers</Text>
-    </View>
-  );
-};
-const Following = () => {
-  return (
-    <View>
-      <Text>Following</Text>
-    </View>
-  );
-};
-
-export const ProfileNavigator = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Timeline" component={Timeline} />
-      <Tab.Screen name="Followers" component={Followers} />
-      <Tab.Screen name="Following" component={Following} />
-    </Tab.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+    </Stack.Navigator>
   );
 };

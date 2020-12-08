@@ -3,6 +3,7 @@ import PropsTypes from "prop-types";
 
 import { View, TextInput, Text, StyleSheet } from "react-native";
 import colors from "../theme/colors";
+import Error from "./Form/Error";
 import AntDesign from "react-native-vector-icons/AntDesign";
 
 const Input = ({
@@ -16,28 +17,32 @@ const Input = ({
   blur,
   onBlur,
   value,
+  error,
 }) => {
   return (
-    <View style={{ ...styles.inputContainer, ...customContainerStyle }}>
-      <TextInput
-        value={value}
-        placeholder={placeholder}
-        style={{ ...styles.input, ...customInputStyle }}
-        secureTextEntry={secureTextEntry}
-        keyboardType={keyboardType}
-        autoCorrect={false}
-        onChangeText={onChange}
-        autoCapitalize="none"
-        placeholderTextColor={colors.white}
-        onBlur={onBlur}
-      />
-      {blur ? (
-        isValid ? (
-          <AntDesign name="checkcircle" size={16} color={colors.success} />
-        ) : (
-          <AntDesign name="closecircle" size={16} color={colors.error} />
-        )
-      ) : null}
+    <View style={styles.container}>
+      <View style={{ ...styles.inputContainer, ...customContainerStyle }}>
+        <TextInput
+          value={value}
+          placeholder={placeholder}
+          style={{ ...styles.input, ...customInputStyle }}
+          secureTextEntry={secureTextEntry}
+          keyboardType={keyboardType}
+          autoCorrect={false}
+          onChangeText={onChange}
+          autoCapitalize="none"
+          placeholderTextColor={colors.white}
+          onBlur={onBlur}
+        />
+        {blur ? (
+          isValid ? (
+            <AntDesign name="checkcircle" size={16} color={colors.success} />
+          ) : (
+            <AntDesign name="closecircle" size={16} color={colors.error} />
+          )
+        ) : null}
+      </View>
+      {!isValid && blur ? <Error error={error} /> : null}
     </View>
   );
 };
@@ -56,14 +61,15 @@ Input.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  inputContainer: {
+  container: {
     marginBottom: 20,
+  },
+  inputContainer: {
     width: "100%",
-
     borderBottomColor: "white",
     borderBottomWidth: 0.5,
-
-    // backgroundColor: 'red  ',
+    marginBottom: 5,
+    paddingBottom: 3,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
