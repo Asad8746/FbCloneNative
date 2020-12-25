@@ -5,7 +5,6 @@ import { Context } from "../../../Context/Profile";
 
 const ProfileNavigator = () => {
   const { state } = useContext(Context);
-  console.log("Profile Header", state);
   const { followers, following } = state.profile;
   return (
     <View style={styles.containerStyle}>

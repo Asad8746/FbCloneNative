@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -19,6 +19,7 @@ import colors from "../theme/colors";
 import typography from "../theme/typography";
 
 export const Login = ({ navigation }) => {
+  const [errorMessage, setErrorMessage] = useState("");
   const email = useFormValidation("", EmailValidator);
   const password = useFormValidation("", validator, "Password is Required");
   const { Login } = useContext(Context);
@@ -57,10 +58,14 @@ export const Login = ({ navigation }) => {
             <Text style={styles.infoText}>Sign in</Text>
             <CircleButton
               onPress={() => {
-                Login({ email: email.state, password: password.state });
+                Login(
+                  { email: email.state, password: password.state },
+                  setErrorMessage
+                );
               }}
             />
           </View>
+
           <View style={styles.links}>
             <TouchableOpacity
               onPress={() => navigation.navigate(authConstants.register)}
@@ -72,6 +77,11 @@ export const Login = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </Form>
+        {errorMessage ? (
+          <View style={styles.errorMessageContainer}>
+            <Text style={styles.errorMessage}> Invalid Password or Email</Text>
+          </View>
+        ) : null}
       </View>
     </ScrollView>
   );
@@ -126,5 +136,16 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.white,
     borderBottomWidth: 1,
     ...typography.h5,
+  },
+  errorMessageContainer: {
+    paddingVertical: 20,
+    alignItems: "center",
+    width: "100%",
+  },
+  errorMessage: {
+    color: colors.error,
+    letterSpacing: 2,
+    fontSize: 12,
+    textTransform: "uppercase",
   },
 });

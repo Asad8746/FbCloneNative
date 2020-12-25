@@ -2,25 +2,27 @@ import Api from "../../Api";
 import setToken from "../../utils/setToken";
 import authConstants from "./constants";
 const Login = (dispatch) => {
-  return async (data) => {
+  return async (data, cb) => {
     try {
       const response = await Api.post("/user/auth", data);
       if (response.status === 200) {
         const token = response.headers["x-auth-token"];
         setToken(token, () => {
           dispatch({
-            type: authConstants.Auth,
-            payload: { isAuth: true, loading: false },
+            type: authConstants.SET_AUTH,
+            payload: response.data,
           });
         });
       }
     } catch (err) {
-      console.log(err.response.data);
+      if (err.response && cb) {
+        cb(err.response.data);
+        dispatch({
+          type: authConstants.SET_LOADING,
+          payload: err.response.data,
+        });
+      }
     }
-    dispatch({
-      type: authConstants.login,
-      payload: { isAuth: false, loading: false },
-    });
   };
 };
 
@@ -31,14 +33,14 @@ const checkToken = (dispatch) => {
       if (response.status === 200) {
         const { id, f_name, l_name } = response.data;
         dispatch({
-          type: authConstants.AUTH,
+          type: authConstants.SET_AUTH,
           payload: { id, f_name, l_name },
         });
       }
     } catch (err) {
       dispatch({
-        type: authConstants.AUTH,
-        payload: { isAuth: false, loading: false },
+        type: authConstants.SET_LOADING,
+        payload: false,
       });
       console.log(err.response.data);
     }

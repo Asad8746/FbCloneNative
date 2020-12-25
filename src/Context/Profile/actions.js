@@ -4,7 +4,6 @@ import constants from "./contants";
 const getProfile = (dispatch) => {
   return async (id) => {
     try {
-      console.log(id);
       const response = await Api.get(`/profile/${id}`);
       if (response.status === 200) {
         dispatch({ type: constants.profile, payload: response.data });
@@ -15,4 +14,10 @@ const getProfile = (dispatch) => {
   };
 };
 
-export default { getProfile };
+const resetProfile = (dispatch) => {
+  return () => {
+    console.log("Profile REseting");
+    dispatch({ type: constants.resetProfile });
+  };
+};
+export default { getProfile, resetProfile };

@@ -4,13 +4,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   AntDesign,
   FontAwesome,
-  Ionicons,
-  MaterialIcons,
   MaterialCommunityIcons,
-  Entypo,
 } from "@expo/vector-icons";
 import { ProfileScreen } from "../Screens/";
 import HomeScreen from "../Screens/HomeScreen";
+import PeopleStackNavigator from "./PeopleStackNavigator";
 import PeopleScreen from "../Screens/PeopleScreen";
 import GroupScreen from "../Screens/GroupScreen";
 import PageScreen from "../Screens/PagesScreen";
@@ -68,8 +66,9 @@ const BottomTabNavigator = ({ navigation }) => {
 
       <BottomTab.Screen
         name="People"
-        component={PeopleScreen}
+        component={PeopleStackNavigator}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="users" size={size} color={color} />
           ),
@@ -80,9 +79,6 @@ const BottomTabNavigator = ({ navigation }) => {
         component={GroupScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            // <Ionicons name="people-circle" color={color} size={size} />
-            // <AntDesign name="home" size={size} color={color} />
-            // <MaterialIcons name="groups" size={size} color={color} />
             <MaterialCommunityIcons
               name="account-group"
               size={size}

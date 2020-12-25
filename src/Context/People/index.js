@@ -1,12 +1,13 @@
 import useDataContext from "../useDataContext";
-import actions from "./actions";
 import reducer from "./reducer";
+import actions from "./actions";
 
-const INITIAL_STATE = { profile: {}, loading: true };
 export const [Context, Provider] = useDataContext(
-  INITIAL_STATE,
+  {
+    people: [],
+    loading: true,
+    error: "",
+  },
   reducer,
   actions
 );
-
-export default INITIAL_STATE;

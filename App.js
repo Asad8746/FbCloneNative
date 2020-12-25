@@ -7,19 +7,21 @@ import Loader from "./src/Components/Loader";
 import { Context } from "./src/Context/Auth";
 import Provider from "./src/Context/ContextProvider";
 import { AppLoading } from "expo";
+import colors from "./src/theme/colors";
 
 const App = () => {
   const { state, checkToken } = useContext(Context);
   useEffect(() => {
+    // console.log("Check Token");
     checkToken();
   }, []);
   if (state.loading) {
     return <Loader />;
   }
-  console.log(state);
+  console.log("App is Running");
   return (
     <>
-      <StatusBar backgroundColor="black" />
+      <StatusBar backgroundColor={colors.white} />
       <NavigationContainer>
         {state.isAuth ? <DrawerNavigator /> : <AuthNavigator />}
       </NavigationContainer>

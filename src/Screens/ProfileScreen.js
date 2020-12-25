@@ -3,17 +3,26 @@ import React, { useCallback, useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import Loader from "../Components/Loader";
 import TimeLine from "../Components/Profile/TimeLine";
+import SafeAreaView from "../Components/SafeArea";
 import { Context as ProfileContext } from "../Context/Profile";
-import { Context as AuthContext } from "../Context/Auth";
+import { Context as PostsContext } from "../Context/Posts";
 
 export const ProfileScreen = ({ route }) => {
   const { id } = route.params;
-  const { state: ProfileState, getProfile } = useContext(ProfileContext);
-  const { state: AuthState } = useContext(AuthContext);
-
+  const { state, getPosts, resetPosts } = useContext(PostsContext);
+  const { state: ProfileState, getProfile, resetProfile } = useContext(
+    ProfileContext
+  );
+  console.log(state);
   useFocusEffect(
     useCallback(() => {
       getProfile(id);
+      getPosts(id);
+
+      return () => {
+        resetProfile();
+        resetPosts();
+      };
     }, [id])
   );
 
@@ -21,9 +30,10 @@ export const ProfileScreen = ({ route }) => {
     return <Loader />;
   }
   return (
-    <View style={styles.ProfileContainer}>
+    <SafeAreaView style={styles.ProfileContainer}>
       <TimeLine />
-    </View>
+      {/* <Posts /> */}
+    </SafeAreaView>
   );
 };
 
