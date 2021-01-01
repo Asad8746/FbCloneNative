@@ -11,6 +11,7 @@ import { peopleConstants } from "../Navigators/constants";
 const PeopleScreen = ({ navigation }) => {
   const { state, getPeopleAction } = useContext(Context);
   const { loading, people } = state;
+  console.log(state);
   useFocusEffect(() => {
     getPeopleAction();
   }, []);

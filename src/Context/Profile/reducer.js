@@ -1,5 +1,5 @@
 import constants from "./contants";
-import INITIAL_STATE from "./";
+import { INITIAL_STATE } from "./initState";
 export default (state, action) => {
   switch (action.type) {
     case constants.profile:

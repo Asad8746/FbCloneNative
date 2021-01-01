@@ -6,21 +6,16 @@ import {
   FontAwesome,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-import { ProfileScreen } from "../Screens/";
 import HomeScreen from "../Screens/HomeScreen";
 import PeopleStackNavigator from "./PeopleStackNavigator";
-import PeopleScreen from "../Screens/PeopleScreen";
 import GroupScreen from "../Screens/GroupScreen";
-import PageScreen from "../Screens/PagesScreen";
 import colors from "../theme/colors";
 import DrawerButton from "../Components/DrawerButton";
-import { Context } from "../Context/Auth";
+import { ProfileNavigator } from "./ProfileNavigator";
+
 const BottomTab = createBottomTabNavigator();
 
 const BottomTabNavigator = ({ navigation }) => {
-  const {
-    state: { id },
-  } = useContext(Context);
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
@@ -45,8 +40,7 @@ const BottomTabNavigator = ({ navigation }) => {
       />
       <BottomTab.Screen
         name="Profile"
-        component={ProfileScreen}
-        initialParams={{ id }}
+        component={ProfileNavigator}
         options={{
           tabBarIcon: ({ color, size }) => {
             return <FontAwesome name="user-circle" size={size} color={color} />;

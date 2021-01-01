@@ -19,4 +19,30 @@ const resetPosts = (dispatch) => {
   };
 };
 
-export default { getPosts, resetPosts };
+const getPostsForHome = (dispatch) => {
+  return async () => {
+    try {
+      const response = await Api.get("/home/");
+      if (response.status === 200) {
+        dispatch({ type: constants.getPosts, payload: response.data });
+        console.log(response.data);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+};
+
+const createPost = (dispatch) => {
+  return async (data, cb) => {
+    try {
+      const response = await Api.post("/posts/create", data);
+      if (response.status === 200) {
+        cb();
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+};
+export default { getPosts, resetPosts, getPostsForHome, createPost };

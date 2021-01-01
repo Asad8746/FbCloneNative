@@ -9,11 +9,10 @@ import { Context as PostsContext } from "../Context/Posts";
 
 export const ProfileScreen = ({ route }) => {
   const { id } = route.params;
-  const { state, getPosts, resetPosts } = useContext(PostsContext);
+  const { getPosts, resetPosts } = useContext(PostsContext);
   const { state: ProfileState, getProfile, resetProfile } = useContext(
     ProfileContext
   );
-  console.log(state);
   useFocusEffect(
     useCallback(() => {
       getProfile(id);
@@ -32,7 +31,6 @@ export const ProfileScreen = ({ route }) => {
   return (
     <SafeAreaView style={styles.ProfileContainer}>
       <TimeLine />
-      {/* <Posts /> */}
     </SafeAreaView>
   );
 };

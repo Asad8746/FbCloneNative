@@ -3,6 +3,7 @@ import { View, Text, ScrollView } from "react-native";
 import ProfileHeader from "../ProfileHeader";
 import Navigator from "../Navigator";
 import Buttons from "../Buttons";
+import CreatePostButton from "../CreatePostButton";
 import Posts from "../../PostList";
 import { Context as AuthContext } from "../../../Context/Auth";
 import { Context as ProfileContext } from "../../../Context/Profile";
@@ -20,6 +21,7 @@ const TimeLine = () => {
   };
   return (
     <View>
+      {AuthState.id === ProfileState.profile._id && <CreatePostButton />}
       <Posts PostHeader={renderHeader()} />
     </View>
   );

@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableWithoutFeedback } from "react-native";
 import { Image } from "react-native-elements";
 import { MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
 import styles from "./index.styles";
 
 import { Context } from "../../../Context/Profile";
@@ -12,6 +13,7 @@ import colors from "../../../theme/colors";
 import { ImageBackground } from "react-native";
 
 const ProfileHeader = () => {
+  const navigation = useNavigation();
   const { state } = useContext(Context);
   const { state: AuthState } = useContext(AuthContext);
 
@@ -19,28 +21,30 @@ const ProfileHeader = () => {
   return (
     <View style={styles.containerStyle}>
       {AuthState.id !== _id && (
-        <View
-          style={{
-            backgroundColor: "rgba(0,0,0,0.8)",
-            // borderRadius: 40,
-            justifyContent: "center",
-            alignItems: "flex-end",
-            position: "absolute",
-            left: 0,
-            top: 24,
-            height: 30,
-            borderBottomRightRadius: 30,
-            // borderTopRightRadius: -5,
-            zIndex: 999,
-            padding: 5,
-          }}
-        >
-          <MaterialIcons
-            name="navigate-before"
-            color={colors.white}
-            size={25}
-          />
-        </View>
+        <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+          <View
+            style={{
+              backgroundColor: "rgba(0,0,0,0.8)",
+              // borderRadius: 40,
+              justifyContent: "center",
+              alignItems: "flex-end",
+              position: "absolute",
+              left: 0,
+              top: 24,
+              height: 30,
+              borderBottomRightRadius: 30,
+              // borderTopRightRadius: -5,
+              zIndex: 999,
+              padding: 5,
+            }}
+          >
+            <MaterialIcons
+              name="navigate-before"
+              color={colors.white}
+              size={25}
+            />
+          </View>
+        </TouchableWithoutFeedback>
       )}
       <ImageBackground
         source={{
