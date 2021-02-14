@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
-const DrawerButton = (props) => {
+export const DrawerButton = (props) => {
   return (
     <TouchableOpacity {...props}>
       <View

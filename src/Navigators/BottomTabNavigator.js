@@ -1,17 +1,15 @@
-import React, { useContext } from "react";
-import { View, Text } from "react-native";
+import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   AntDesign,
   FontAwesome,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-import HomeScreen from "../Screens/HomeScreen";
-import PeopleStackNavigator from "./PeopleStackNavigator";
-import GroupScreen from "../Screens/GroupScreen";
+import { HomeScreen, GroupScreen } from "../Screens";
 import colors from "../theme/colors";
-import DrawerButton from "../Components/DrawerButton";
+import { DrawerButton } from "../Components";
 import { ProfileNavigator } from "./ProfileNavigator";
+import PeopleStackNavigator from "./PeopleStackNavigator";
 
 const BottomTab = createBottomTabNavigator();
 

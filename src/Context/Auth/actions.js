@@ -4,6 +4,7 @@ import authConstants from "./constants";
 const Login = (dispatch) => {
   return async (data, cb) => {
     try {
+      cb("", true);
       const response = await Api.post("/user/auth", data);
       if (response.status === 200) {
         const token = response.headers["x-auth-token"];
@@ -16,12 +17,9 @@ const Login = (dispatch) => {
       }
     } catch (err) {
       if (err.response && cb) {
-        cb(err.response.data);
-        dispatch({
-          type: authConstants.SET_LOADING,
-          payload: err.response.data,
-        });
+        cb(err.response.data, false);
       }
+      cb("", false);
     }
   };
 };
@@ -48,23 +46,26 @@ const checkToken = (dispatch) => {
 };
 
 const registerUser = (dispatch) => {
-  return async (data) => {
+  return async (data, cb = () => {}) => {
     try {
+      cb(true, "");
       const response = await Api.post("/user/register", data);
       if (response.status === 200) {
         const token = response.headers["x-auth-token"];
+        cb(false, "");
         setToken(token, () => {
           dispatch({
-            type: authConstants.register,
-            payload: { isAuth: true, loading: false },
+            type: authConstants.SET_AUTH,
+            payload: response.data,
           });
         });
       }
     } catch (err) {
-      dispatch({
-        type: authConstants.register,
-        payload: { isAuth: false, loading: false },
-      });
+      cb(false, err.response.data);
+      // dispatch({
+      //   type: authConstants.register,
+      //   payload: { isAuth: false, loading: false },
+      // });
       console.log(err.response.data);
     }
   };

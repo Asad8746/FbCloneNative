@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import PropsTypes from "prop-types";
 
-import { View, TextInput, Text, StyleSheet } from "react-native";
+import { View, TextInput, StyleSheet, Animated } from "react-native";
 import colors from "../theme/colors";
-import Error from "./Form/Error";
+import { Error } from "./";
 import AntDesign from "react-native-vector-icons/AntDesign";
 
 const Input = ({
@@ -19,20 +19,51 @@ const Input = ({
   value,
   error,
 }) => {
+  const translateY = useRef(new Animated.Value(0)).current;
+  const fontSize = useRef(new Animated.Value(14)).current;
+  const animateOnFocus = () => {
+    Animated.timing(translateY, {
+      toValue: -30,
+      useNativeDriver: true,
+      duration: 200,
+    }).start();
+  };
+  const animateOnBlur = () => {
+    Animated.timing(translateY, {
+      toValue: 0,
+      useNativeDriver: true,
+      duration: 200,
+    }).start();
+  };
+
   return (
     <View style={styles.container}>
       <View style={{ ...styles.inputContainer, ...customContainerStyle }}>
+        <Animated.Text
+          style={{
+            ...styles.textStyle,
+            transform: [{ translateY }],
+            // fontSize,
+          }}
+        >
+          {placeholder}
+        </Animated.Text>
         <TextInput
           value={value}
-          placeholder={placeholder}
+          onFocus={() => animateOnFocus()}
+          // placeholder={placeholder}
           style={{ ...styles.input, ...customInputStyle }}
           secureTextEntry={secureTextEntry}
           keyboardType={keyboardType}
           autoCorrect={false}
           onChangeText={onChange}
           autoCapitalize="none"
-          placeholderTextColor={colors.white}
-          onBlur={onBlur}
+          onBlur={() => {
+            if (value.length === 0) {
+              animateOnBlur();
+            }
+            onBlur();
+          }}
         />
         {blur ? (
           isValid ? (
@@ -82,8 +113,14 @@ const styles = StyleSheet.create({
     // borderBottomWidth: 0.5,
     width: "95%",
     color: colors.white,
+
     paddingLeft: 0,
     letterSpacing: 2,
+  },
+  textStyle: {
+    color: colors.white,
+    position: "absolute",
+    left: 0,
   },
 });
 

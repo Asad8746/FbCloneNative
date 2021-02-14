@@ -1,10 +1,14 @@
 import { StyleSheet } from "react-native";
 import colors from "../../../theme/colors";
+import { Dimensions } from "react-native";
+
+const WINDOW_HEIGHT = Dimensions.get("window").height;
+console.log(WINDOW_HEIGHT);
 
 export default StyleSheet.create({
   containerStyle: {
     width: "100%",
-    height: 200,
+    height: WINDOW_HEIGHT >= 1000 ? 300 : 200,
     position: "relative",
   },
 
@@ -28,9 +32,9 @@ export default StyleSheet.create({
     flex: 1,
   },
   profilePicContainer: {
-    height: 100,
-    width: 100,
-    borderRadius: 100,
+    height: WINDOW_HEIGHT >= 1000 ? 150 : 100,
+    width: WINDOW_HEIGHT >= 1000 ? 150 : 100,
+    borderRadius: WINDOW_HEIGHT >= 1000 ? 150 : 100,
     overflow: "hidden",
   },
   profilePicStyle: {

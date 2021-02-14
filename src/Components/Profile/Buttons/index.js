@@ -1,7 +1,7 @@
 import React from "react";
 import { View, TouchableOpacity, Text } from "react-native";
 import styles from "./index.styles";
-const Buttons = ({ containerStyle }) => {
+export const Buttons = ({ containerStyle }) => {
   return (
     <View style={{ ...styles.container, ...containerStyle }}>
       <TouchableOpacity style={[styles.buttonContainer, styles.followButton]}>
@@ -13,5 +13,3 @@ const Buttons = ({ containerStyle }) => {
     </View>
   );
 };
-
-export default Buttons;

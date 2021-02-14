@@ -7,4 +7,5 @@ export default {
   error: "orange",
   success: "#ffffff",
   text: "rgb(57,62,65)",
+  red: "#f05454",
 };

@@ -12,7 +12,7 @@ import { color } from "react-native-reanimated";
 import colors from "../../../theme/colors";
 import { ImageBackground } from "react-native";
 
-const ProfileHeader = () => {
+export const ProfileHeader = () => {
   const navigation = useNavigation();
   const { state } = useContext(Context);
   const { state: AuthState } = useContext(AuthContext);
@@ -76,5 +76,3 @@ const ProfileHeader = () => {
     </View>
   );
 };
-
-export default ProfileHeader;

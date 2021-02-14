@@ -4,5 +4,5 @@ export const validator = (value, setError, setIsValid, errorMessage) => {
     return setError(errorMessage);
   }
   setIsValid(true);
-  setError('');
+  setError("");
 };

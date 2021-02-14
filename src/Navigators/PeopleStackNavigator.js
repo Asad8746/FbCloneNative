@@ -1,11 +1,9 @@
 import React from "react";
-import { View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { peopleConstants } from "./constants";
-import PeopleListScreen from "../Screens/PeopleScreen";
-import { ProfileScreen } from "../Screens/";
+import { ProfileScreen, PeopleScreen } from "../Screens/";
 import colors from "../theme/colors";
-import HeaderLeft from "../Components/Headers/HeaderLeft";
+
 const Stack = createStackNavigator();
 const PeopleStackNavigator = () => {
   return (
@@ -22,7 +20,7 @@ const PeopleStackNavigator = () => {
     >
       <Stack.Screen
         name={peopleConstants.peopleList}
-        component={PeopleListScreen}
+        component={PeopleScreen}
         options={{
           title: "People",
         }}

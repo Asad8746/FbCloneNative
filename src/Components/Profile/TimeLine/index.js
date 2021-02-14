@@ -1,30 +1,33 @@
 import React, { useContext } from "react";
-import { View, Text, ScrollView } from "react-native";
-import ProfileHeader from "../ProfileHeader";
-import Navigator from "../Navigator";
-import Buttons from "../Buttons";
-import CreatePostButton from "../CreatePostButton";
-import Posts from "../../PostList";
+import { View } from "react-native";
+import {
+  PostList,
+  ProfileNavigator,
+  ProfileHeader,
+  CreatePostButton,
+  Buttons,
+} from "../../";
 import { Context as AuthContext } from "../../../Context/Auth";
 import { Context as ProfileContext } from "../../../Context/Profile";
-const TimeLine = () => {
+export const TimeLine = () => {
   const { state: AuthState } = useContext(AuthContext);
   const { state: ProfileState } = useContext(ProfileContext);
   const renderHeader = () => {
     return (
       <>
         <ProfileHeader />
-        <Navigator />
+        <ProfileNavigator />
         {AuthState.id !== ProfileState.profile._id && <Buttons />}
       </>
     );
   };
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       {AuthState.id === ProfileState.profile._id && <CreatePostButton />}
-      <Posts PostHeader={renderHeader()} />
+      <PostList
+        PostHeader={renderHeader()}
+        emptyMessage="No Posts Found Create one?"
+      />
     </View>
   );
 };
-
-export default TimeLine;

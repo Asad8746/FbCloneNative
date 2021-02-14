@@ -1,7 +1,7 @@
 import React from "react";
 import { View, ActivityIndicator, StyleSheet } from "react-native";
 import colors from "../theme/colors";
-const Loader = () => {
+export const Loader = () => {
   return (
     <View style={styles.container}>
       <ActivityIndicator color={colors.blue} size={30} />
@@ -17,4 +17,3 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
 });
-export default Loader;

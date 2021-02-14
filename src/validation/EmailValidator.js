@@ -1,4 +1,4 @@
-export default (value, setError, setIsValid) => {
+export const emailValidator = (value, setError, setIsValid) => {
   const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   if (value.trim() === '') {
     setIsValid(false);
