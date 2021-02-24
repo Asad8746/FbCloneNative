@@ -9,6 +9,7 @@ import { HomeScreen, GroupScreen } from "../Screens";
 import colors from "../theme/colors";
 import { DrawerButton } from "../Components";
 import { ProfileNavigator } from "./ProfileNavigator";
+import { UserNavigator } from "./UserNavigator";
 import PeopleStackNavigator from "./PeopleStackNavigator";
 
 const BottomTab = createBottomTabNavigator();
@@ -38,11 +39,12 @@ const BottomTabNavigator = ({ navigation }) => {
       />
       <BottomTab.Screen
         name="Profile"
-        component={ProfileNavigator}
+        component={UserNavigator}
         options={{
           tabBarIcon: ({ color, size }) => {
             return <FontAwesome name="user-circle" size={size} color={color} />;
           },
+          unmountOnBlur: true,
         }}
       />
 

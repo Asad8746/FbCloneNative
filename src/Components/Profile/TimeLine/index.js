@@ -17,7 +17,9 @@ export const TimeLine = () => {
       <>
         <ProfileHeader />
         <ProfileNavigator />
-        {AuthState.id !== ProfileState.profile._id && <Buttons />}
+        {AuthState.id !== ProfileState.profile._id && (
+          <Buttons id={ProfileState._id} />
+        )}
       </>
     );
   };

@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { TimeLine, Loader, SafeAreaComponent } from "../../Components";
 import { Context as ProfileContext } from "../../Context/Profile";
@@ -7,21 +7,30 @@ import styles from "./index.styles";
 export const ProfileScreen = ({ route }) => {
   const { id } = route.params;
   const { getPosts, resetPosts } = useContext(PostsContext);
-  const { state: ProfileState, getProfile, resetProfile } = useContext(
+  const { state: profileState, getProfile, resetProfile } = useContext(
     ProfileContext
   );
-  useFocusEffect(
-    useCallback(() => {
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     console.log("Profile Id", profileState.profile._id);
+  //     if (id !== profileState.profile._id) {
+  //       getProfile(id);
+  //       getPosts(id);
+  //     }
+  //   }, [id])
+  // );
+  useEffect(() => {
+    if (id !== profileState.profile._id) {
       getProfile(id);
       getPosts(id);
-      return () => {
-        resetProfile();
-        resetPosts();
-      };
-    }, [id])
-  );
-
-  if (ProfileState.loading) {
+    }
+    return () => {
+      console.log("i am unmounted");
+      resetProfile();
+      resetPosts();
+    };
+  }, [id]);
+  if (profileState.loading) {
     return <Loader />;
   }
   return (

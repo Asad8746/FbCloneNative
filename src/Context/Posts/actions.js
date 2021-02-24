@@ -25,7 +25,6 @@ const getPostsForHome = (dispatch) => {
       const response = await Api.get("/home/");
       if (response.status === 200) {
         dispatch({ type: constants.getPosts, payload: response.data });
-        console.log(response.data);
       }
     } catch (err) {
       console.log(err.message);

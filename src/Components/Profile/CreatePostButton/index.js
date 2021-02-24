@@ -4,13 +4,13 @@ import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 import colors from "../../../theme/colors";
 import styles from "./index.styles";
-import { profileConstants } from "../../../Navigators/constants";
+import { userConstansts } from "../../../Navigators/constants";
 export const CreatePostButton = () => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate(profileConstants.createPost)}
+      onPress={() => navigation.navigate(userConstansts.createPost)}
     >
       <AntDesign name="plus" size={18} color={colors.white} />
     </TouchableOpacity>

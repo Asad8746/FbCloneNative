@@ -1,1 +1,1 @@
-export const INITIAL_STATE = { profile: {}, loading: true };
+export const INITIAL_STATE = { profile: {}, loading: true, error: "" };

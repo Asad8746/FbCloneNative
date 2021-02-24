@@ -8,4 +8,5 @@ export default {
   success: "#ffffff",
   text: "rgb(57,62,65)",
   red: "#f05454",
+  grey: "#A9A9A9",
 };

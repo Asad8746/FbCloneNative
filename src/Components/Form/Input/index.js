@@ -3,7 +3,7 @@ import PropsTypes from "prop-types";
 
 import { View, TextInput, Animated } from "react-native";
 import colors from "../../../theme/colors";
-import Error from "../Error";
+import { Error } from "../Error";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import styles from "./index.styles";
 export const Input = ({
@@ -34,7 +34,9 @@ export const Input = ({
       duration: 200,
     }).start();
   };
-
+  const renderMessage = () => {
+    return !isValid && blur ? <Error error={error} /> : null;
+  };
   return (
     <View style={styles.container}>
       <View style={{ ...styles.inputContainer, ...customContainerStyle }}>
@@ -75,7 +77,7 @@ export const Input = ({
           )
         ) : null}
       </View>
-      {!isValid && blur ? <Error error={error} /> : null}
+      {renderMessage()}
     </View>
   );
 };

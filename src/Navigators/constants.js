@@ -14,4 +14,15 @@ export const peopleConstants = {
 export const profileConstants = {
   profile: `${profile}/user`,
   createPost: `${profile}/createPost`,
+  followNavigator: `${profile}/followNavigator`,
+};
+
+export const ProfileTopTabNavigatorConstants = {
+  followers: `${profile}/followers`,
+  following: `${profile}/following`,
+};
+
+export const userConstansts = {
+  profile: `${profile}/me`,
+  createPost: `${profile}/post/create`,
 };

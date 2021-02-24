@@ -9,14 +9,15 @@ const getProfile = (dispatch) => {
         dispatch({ type: constants.profile, payload: response.data });
       }
     } catch (err) {
-      console.log(err.response.data);
+      console.log("ProfileActionError", err.response.data);
+      dispatch({ type: constants.loading, payload: false });
+      dispatch({ type: constants.error, payload: "Opps Something goes wrong" });
     }
   };
 };
 
 const resetProfile = (dispatch) => {
   return () => {
-    console.log("Profile REseting");
     dispatch({ type: constants.resetProfile });
   };
 };
