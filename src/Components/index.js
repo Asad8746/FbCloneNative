@@ -8,3 +8,6 @@ export * from "./Button";
 export * from "./People";
 export * from "./ImageUploader";
 export * from "./PostList";
+export * from "./Headers";
+export * from "./Drawer";
+export * from "./Image";

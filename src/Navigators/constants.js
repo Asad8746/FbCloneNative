@@ -1,6 +1,9 @@
+const drawer = "drawer";
 const auth = "auth";
 const people = "people";
+
 const profile = "profile";
+const settings = "settings";
 export const authConstants = {
   login: `${auth}/login`,
   register: `${auth}/register`,
@@ -25,4 +28,14 @@ export const ProfileTopTabNavigatorConstants = {
 export const userConstansts = {
   profile: `${profile}/me`,
   createPost: `${profile}/post/create`,
+};
+
+export const settingsConstants = {
+  settings: `${settings}/initial`,
+  block: `${settings}/block`,
+};
+
+export const drawerConstants = {
+  home: `${drawer}/home`,
+  settings: `${drawer}/settings`,
 };

@@ -5,7 +5,13 @@ import Empty from "../Empty";
 import { Loader } from "../Loader";
 import { PeopleItem } from "../People/PeopleItem";
 import { SafeAreaComponent } from "../SafeArea";
-const PeopleList = ({ getResource, dependency, message }) => {
+const PeopleList = ({
+  getResource,
+  renderItem,
+  keyExtractor,
+  dependency,
+  message,
+}) => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,15 +31,16 @@ const PeopleList = ({ getResource, dependency, message }) => {
         ListEmptyComponent={() => <Empty message={message} />}
         bounces={false}
         showsVerticalScrollIndicator={false}
-        keyExtractor={(item) => item._id}
+        keyExtractor={keyExtractor}
         contentContainerStyle={{ flexGrow: 1 }}
         renderItem={({ item }) => {
-          return (
-            <PeopleItem
-              profile={item}
-              onPress={() => console.log("I am pressed")}
-            />
-          );
+          // return (
+          //   <PeopleItem
+          //     profile={item}
+          //     onPress={() => console.log("I am pressed")}
+          //   />
+          // );
+          return renderItem(item);
         }}
       />
     </SafeAreaComponent>

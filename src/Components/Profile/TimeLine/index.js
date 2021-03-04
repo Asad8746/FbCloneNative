@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { View } from "react-native";
-import {
-  PostList,
-  ProfileNavigator,
-  ProfileHeader,
-  CreatePostButton,
-  Buttons,
-} from "../../";
+import { PostList } from "../../PostList";
+import { ProfileNavigator } from "../ProfileNavigator";
+import { CreatePostButton } from "../CreatePostButton";
+import { ProfileHeader } from "../ProfileHeader";
+
+import { Buttons } from "../Buttons";
+
 import { Context as AuthContext } from "../../../Context/Auth";
 import { Context as ProfileContext } from "../../../Context/Profile";
 export const TimeLine = () => {
@@ -28,7 +28,11 @@ export const TimeLine = () => {
       {AuthState.id === ProfileState.profile._id && <CreatePostButton />}
       <PostList
         PostHeader={renderHeader()}
-        emptyMessage="No Posts Found Create one?"
+        emptyMessage={
+          AuthState.id === ProfileState.profile._id
+            ? "No Posts Found Create one?"
+            : "No Posts Found"
+        }
       />
     </View>
   );

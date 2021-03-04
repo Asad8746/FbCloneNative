@@ -1,5 +1,4 @@
-import React, { useCallback, useContext, useEffect } from "react";
-import { useFocusEffect } from "@react-navigation/native";
+import React, { useContext, useEffect } from "react";
 import { TimeLine, Loader, SafeAreaComponent } from "../../Components";
 import { Context as ProfileContext } from "../../Context/Profile";
 import { Context as PostsContext } from "../../Context/Posts";
@@ -24,11 +23,6 @@ export const ProfileScreen = ({ route }) => {
       getProfile(id);
       getPosts(id);
     }
-    return () => {
-      console.log("i am unmounted");
-      resetProfile();
-      resetPosts();
-    };
   }, [id]);
   if (profileState.loading) {
     return <Loader />;

@@ -45,6 +45,41 @@ export const getFollowing = async (id, cb = () => {}) => {
     }
   } catch (err) {
     console.log(err.message);
-    cb(data, false, err.response.data);
+    cb([], false, err.response.data);
+  }
+};
+
+export const blockUser = async (id, cb = () => {}) => {
+  try {
+    const response = await Api.put(`/block/${id}`);
+    cb(null);
+    if (response.status === 200) {
+      cb(true, false);
+    }
+  } catch (err) {
+    console.log(err.response.data);
+    cb(null, false);
+  }
+};
+
+export const getBlockUsers = async (cb = () => {}) => {
+  try {
+    const response = await Api.get("/block/users");
+    console.log(response.data);
+    cb(response.data, false, "");
+  } catch (err) {
+    console.log(err.response.data);
+    cb([], false, err.response.data);
+  }
+};
+
+export const unBlockUser = async (id, cb = () => {}) => {
+  try {
+    const response = await Api.put(`/unblock/${id}`);
+    if (response.status === 200) {
+      cb();
+    }
+  } catch (err) {
+    console.log(err.response.data);
   }
 };

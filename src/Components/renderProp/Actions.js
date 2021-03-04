@@ -1,7 +1,15 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
-import { checkIsFollowed, followUser, unFollowUser } from "../../Context";
-
-const FollowUnFollowComponent = ({ render, id }) => {
+import {
+  checkIsFollowed,
+  followUser,
+  unFollowUser,
+  blockUser,
+} from "../../Context";
+import { drawerConstants, settingsConstants } from "../../Navigators/constants";
+import PropsTypes from "prop-types";
+const ActionsComponent = ({ render, id }) => {
+  const navigation = useNavigation();
   const [isFollowed, setIsFollowed] = useState(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -29,8 +37,21 @@ const FollowUnFollowComponent = ({ render, id }) => {
       }
     }
   };
-
-  return render(isFollowed, loading, onPress);
+  const onBlockPress = () => {
+    blockUser(id, (blockStatus) => {
+      if (blockStatus !== null && blockStatus) {
+        navigation.navigate(drawerConstants.settings, {
+          screen: settingsConstants.block,
+        });
+      }
+    });
+  };
+  return render(isFollowed, loading, onPress, onBlockPress);
 };
 
-export default FollowUnFollowComponent;
+ActionsComponent.propTypes = {
+  render: PropsTypes.func.isRequired,
+  id: PropsTypes.string.isRequired,
+};
+
+export default ActionsComponent;

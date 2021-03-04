@@ -6,3 +6,5 @@ export * from "./HomeScreen";
 export * from "./GroupScreen";
 export * from "./PagesScreen";
 export * from "./PeopleScreen";
+export * from "./SettingsScreen";
+export * from "./BlockedUsers";

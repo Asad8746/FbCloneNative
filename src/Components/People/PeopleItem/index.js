@@ -4,17 +4,18 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
   Text,
+  ActivityIndicator,
 } from "react-native";
-import { Image } from "react-native-elements";
+import { ImageComponent } from "../../Image";
 import { SimpleLineIcons } from "@expo/vector-icons";
+import FollowUnFollowComponent from "../../renderProp/Actions";
+import PropTypes from "prop-types";
 import colors from "../../../theme/colors";
-import FollowUnFollowComponent from "../../renderProp/Follow-Unfollow";
 
 import styles from "./index.styles";
-import { ActivityIndicator } from "react-native";
 
 export const PeopleItem = ({ profile, onPress }) => {
-  const render = (isFollowed, loading, onFollowPress) => {
+  const render = (isFollowed, loading, onFollowPress, onBlockPress) => {
     return (
       <View style={styles.actions}>
         <TouchableOpacity style={styles.action} onPress={onFollowPress}>
@@ -30,7 +31,10 @@ export const PeopleItem = ({ profile, onPress }) => {
             <SimpleLineIcons color={colors.blue} size={22} name="user-follow" />
           )}
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.action, { marginLeft: 10 }]}>
+        <TouchableOpacity
+          style={[styles.action, { marginLeft: 10 }]}
+          onPress={onBlockPress}
+        >
           <SimpleLineIcons color={colors.red} size={22} name="user-unfollow" />
         </TouchableOpacity>
       </View>
@@ -40,11 +44,11 @@ export const PeopleItem = ({ profile, onPress }) => {
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
-          <Image
+          <ImageComponent
             source={{
               uri: `https://vast-hollows-79591.herokuapp.com/profile/profile_pic/${profile._id}`,
             }}
-            style={styles.imageStyle}
+            customStyle={styles.imageStyle}
           />
         </View>
         <View style={styles.rightContainer}>
@@ -58,4 +62,12 @@ export const PeopleItem = ({ profile, onPress }) => {
       </View>
     </TouchableWithoutFeedback>
   );
+};
+PeopleItem.defaultProps = {
+  profile: {},
+  onPress: () => console.log("I am pressed"),
+};
+PeopleItem.propTypes = {
+  profile: PropTypes.object.isRequired,
+  onPress: PropTypes.func.isRequired,
 };

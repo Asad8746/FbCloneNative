@@ -13,7 +13,7 @@ import { Context as AuthContext } from "../../Context/Auth";
 
 import theme from "../../theme";
 const { height, width } = Dimensions.get("window");
-const FollowNavigatorHeader = () => {
+export const FollowNavigatorHeader = () => {
   const navigation = useNavigation();
   const { state: profileState } = useContext(ProfileContext);
   const { state: authState } = useContext(AuthContext);
