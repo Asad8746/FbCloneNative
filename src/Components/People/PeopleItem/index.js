@@ -13,6 +13,7 @@ import PropTypes from "prop-types";
 import colors from "../../../theme/colors";
 
 import styles from "./index.styles";
+import { profileUrl } from "../../../Api/constants";
 
 export const PeopleItem = ({ profile, onPress }) => {
   const render = (isFollowed, loading, onFollowPress, onBlockPress) => {
@@ -46,7 +47,7 @@ export const PeopleItem = ({ profile, onPress }) => {
         <View style={styles.imageContainer}>
           <ImageComponent
             source={{
-              uri: `https://vast-hollows-79591.herokuapp.com/profile/profile_pic/${profile._id}`,
+              uri: `${profileUrl}${profile._id}`,
             }}
             customStyle={styles.imageStyle}
           />

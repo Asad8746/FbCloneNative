@@ -83,3 +83,23 @@ export const unBlockUser = async (id, cb = () => {}) => {
     console.log(err.response.data);
   }
 };
+
+export const uploadPic = async (url, image, cb = () => {}) => {
+  try {
+    const data = new FormData();
+
+    data.append("file", {
+      type: "image/png",
+      uri: image.uri,
+      name: `temp${Math.random()}.png`,
+    });
+    const response = await Api.put(`/profile/${url}`, data);
+    if (response.status === 201) {
+      console.log("Done");
+      cb();
+    }
+  } catch (err) {
+    console.log(err.response.data);
+    cb();
+  }
+};

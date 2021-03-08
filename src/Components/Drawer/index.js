@@ -7,6 +7,7 @@ import {
 import { Image } from "react-native-elements";
 import styles from "./index.styles";
 import { Context } from "../../Context/Auth";
+import { profileUrl } from "../../Api/constants";
 export const DrawerContent = (props) => {
   const { state } = useContext(Context);
   const { id, f_name, l_name } = state;
@@ -22,7 +23,7 @@ export const DrawerContent = (props) => {
             <Image
               style={styles.imageStyle}
               source={{
-                uri: `https://vast-hollows-79591.herokuapp.com/profile/profile_pic/${id}`,
+                uri: `${profileUrl}${id}`,
               }}
             />
           </View>

@@ -26,7 +26,7 @@ export const CreatePostScreen = () => {
   );
   const [image, setImage] = useState({});
   const [loader, setLoader] = useState(false);
-  console.log("Error", error);
+
   const renderPicUploader = (onPress) => {
     return (
       <TouchableOpacity style={styles.imageUploadBtn} onPress={onPress}>
@@ -49,7 +49,6 @@ export const CreatePostScreen = () => {
     createPost(data, () => navigation.goBack());
     // console.log("Data", data);
   };
-  console.log("Blur", blur);
   return (
     <TouchableOpacity
       style={{ height: "100%" }}
